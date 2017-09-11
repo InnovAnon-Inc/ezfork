@@ -29,11 +29,11 @@ int ezfork (
    __builtin_unreachable ();*/
    error_check (pid == -1) return -1;
    if (pid == 0) {
-      if (childcb (childcb_args) != 0)
+      error_check (childcb (childcb_args) != 0)
          return EXIT_FAILURE;
       return EXIT_SUCCESS;
    }
-   if (parentcb (pid, parentcb_args) != 0)
+   error_check (parentcb (pid, parentcb_args) != 0)
       return -3;
    return 0;
 }
