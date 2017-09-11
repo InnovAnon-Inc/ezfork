@@ -1,8 +1,12 @@
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-#include "ezfork.h"
+#include <ezfork.h>
 
 #define CHILD_CASE case 0
 #define PARENT_CASE default
