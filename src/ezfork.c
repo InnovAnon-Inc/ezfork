@@ -1,6 +1,6 @@
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <stdlib.h>
 
 #include "ezfork.h"
 
@@ -8,13 +8,14 @@
 #define PARENT_CASE default
 #define ERROR_CASE case -1
 
+__attribute__ ((nonnull (1, 3), warn_unused_result))
 int ezfork (
 	int (*childcb)  (void *),        void *childcb_args,
 	int (*parentcb) (pid_t, void *), void *parentcb_args) {
 	pid_t pid;
-	
+
 	pid = fork ();
-	switch (pid) {
+	/*switch (pid) {
     ERROR_CASE: return -1;
 	CHILD_CASE:
 	   if (childcb (childcb_args) != 0)
@@ -25,7 +26,16 @@ int ezfork (
 		   return -3;
 	   return 0;
    }
-   /* unreachable () */
+   __builtin_unreachable ();*/
+   error_check (pid == -1) return -1;
+   if (pid == 0) {
+      if (childcb (childcb_args) != 0)
+         return EXIT_FAILURE;
+      return EXIT_SUCCESS;
+   }
+   if (parentcb (pid, parentcb_args) != 0)
+      return -3;
+   return 0;
 }
 
 #undef CHILD_CASE
