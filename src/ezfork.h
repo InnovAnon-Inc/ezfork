@@ -9,9 +9,15 @@ extern "C" {
 
 #include <glitter.h>
 
+typedef __attribute__ ((warn_unused_result))
+int (*childcb_t) (void *restrict) ;
+
+typedef __attribute__ ((warn_unused_result))
+int (*parentcb_t) (pid_t, void *restrict) ;
+
 int ezfork (
-	int (*childcb)  (void *),        void *childcb_args,
-	int (*parentcb) (pid_t, void *), void *parentcb_args)
+	childcb_t childcb,   void *restrict childcb_args,
+	parentcb_t parentcb, void *restrict parentcb_args)
 __attribute__ ((nonnull (1, 3), warn_unused_result)) ;
 
 #ifdef __cplusplus

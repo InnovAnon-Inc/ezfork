@@ -14,8 +14,8 @@
 
 __attribute__ ((nonnull (1, 3), warn_unused_result))
 int ezfork (
-	int (*childcb)  (void *),        void *childcb_args,
-	int (*parentcb) (pid_t, void *), void *parentcb_args) {
+   childcb_t childcb,    void *restrict childcb_args,
+   parentcb_t parentcb, void *restrict parentcb_args) {
 	pid_t pid;
 
 	pid = fork ();
