@@ -1,7 +1,10 @@
+LIBEZFORK_LIBADD =
+
 lib_LTLIBRARIES = libezfork.la
-libezfork_la_SOURCES = ezfork.c
 include_HEADERS = ezfork.h
-#libezfork_la_CFLAGS =
+libezfork_la_LIBADD = $(LIBEZFORK_LIBADD)
 
 AM_CPPFLAGS = -D__STDC_INT64__
-AM_CPPFLAGS += -I $(srcdir)/../glitter/src
+
+SUBDIRS = ../glitter
+AM_CPPFLAGS += -I ../glitter/src
