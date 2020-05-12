@@ -10,4 +10,4 @@ dist_bin_SCRIPTS = libezfork_config
 
 lib_LTLIBRARIES = libezfork.la
 include_HEADERS = ezfork.h
-libezfork_la_LIBADD = $(LIBEZFORK_LIBADD)
+libezfork_la_LIBADD = @LIBEZFORK_LIBADD@
