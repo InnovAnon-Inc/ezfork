@@ -22,8 +22,9 @@ AC_CHECK_HEADERS([glitter.h])
 
 AC_CHECK_LIB([stdlib],[fork])
 
-srcdir = @srcdir@
-LIBEZFORK_LIBADD="`PATH=$(srcdir)src:$PATH libezfork_config --libs`"
+#srcdir = @srcdir@
+#LIBEZFORK_LIBADD="`PATH=$(srcdir)src:$PATH libezfork_config --libs`"
+LIBEZFORK_LIBADD="`PATH=src:$PATH libezfork_config --libs`"
 AC_SUBST(LIBEZFORK_LIBADD)
 
 INNOVANON_WARNINGS([])
