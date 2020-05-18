@@ -1,13 +1,7 @@
 AM_CPPFLAGS = -D__STDC_INT64__
 
-#if USE_SUBMODULES
-#SUBDIRS = ../glitter
-#AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
-#endif
-
-#include Makefile-LIBADD.inc
-dist_bin_SCRIPTS = libezfork_config
-
 lib_LTLIBRARIES = libezfork.la
 include_HEADERS = ezfork.h
-libezfork_la_LIBADD = @LIBEZFORK_LIBADD@
+libezfork_la_CPPFLAGS = $(GLITTER_CFLAGS)
+libezfork_la_LIBADD   = $(GLITTER_LIBS)
+

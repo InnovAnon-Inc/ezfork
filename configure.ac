@@ -8,24 +8,23 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
+ src/libezfork.pc
 ])
+
+PKG_PROG_PKG_CONFIG
 
 AC_ARG_ENABLE([use-submodules],
     AS_HELP_STRING([--enable-use-submodules], [Enable use submodules]))
 AM_CONDITIONAL([USE_SUBMODULES], [test x"$enable_use_submodules" = "xyes"])
 
 AC_CONFIG_MACRO_DIR([m4])
-#AC_CONFIG_SUBDIRS([glitter])
 
 AC_CHECK_HEADERS([stdlib.h unistd.h sys/types.h])
-AC_CHECK_HEADERS([glitter.h])
+#AC_CHECK_HEADERS([glitter.h])
 
 AC_CHECK_LIB([stdlib],[fork])
 
-#srcdir = @srcdir@
-#LIBEZFORK_LIBADD="`PATH=$(srcdir)src:$PATH libezfork_config --libs`"
-LIBEZFORK_LIBADD="`PATH=src:$PATH libezfork_config --libs`"
-AC_SUBST(LIBEZFORK_LIBADD)
+PKG_CHECK_MODULES([GLITTER],[glitter],,)
 
 INNOVANON_WARNINGS([])
 
